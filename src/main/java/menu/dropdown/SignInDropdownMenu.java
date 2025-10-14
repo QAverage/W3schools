@@ -86,3 +86,4 @@ public class SignInDropdownMenu extends BaseMenu {
         clickOnElement(FORGOT_PASSWORD_LINK);
     }
 }
+
