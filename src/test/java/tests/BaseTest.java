@@ -40,8 +40,7 @@ public class BaseTest {
 
     public void setup(String browser) {
 
-        String headless = System.getenv("HEADLESS");
-        log.info(headless);
+        String ci = System.getenv("CI");
         //Базовая настройка драйвера
         if (browser.equalsIgnoreCase("chrome")) {
             log.info("Setup and config chrome driver");
@@ -54,7 +53,7 @@ public class BaseTest {
             options.addArguments("--disable-notifications");
             options.addArguments("--disable-popup-blocking");
             options.addArguments("--disable-infobars");
-            if (headless != null){
+            if (ci != null){
                 options.addArguments("--headless");
             }
             driver = new ChromeDriver(options);

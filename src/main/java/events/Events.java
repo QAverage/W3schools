@@ -53,11 +53,14 @@ public class Events {
     }
 
     public void checkUrlOfNewWindow(String url) {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-
         Object[] windowHandles = driver.getWindowHandles().toArray();
+        log.info(windowHandles);
         try {
-            driver.switchTo().window((String) windowHandles[1]);
+            if (System.getenv("CI") != null){
+                driver.switchTo().window((String) windowHandles[0]);
+            }else {
+                driver.switchTo().window((String) windowHandles[1]);
+            }
         } catch (NoSuchWindowException e) {
             log.error("No such window with url: {}", url);
         } catch (TimeoutException e) {

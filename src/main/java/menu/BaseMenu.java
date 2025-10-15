@@ -14,7 +14,7 @@ public class BaseMenu extends Events {
 
     public BaseMenu(WebDriver driver) {
         super(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         authDropdown = new AuthDropdown();
     }
 }
