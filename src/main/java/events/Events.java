@@ -53,10 +53,10 @@ public class Events {
     }
 
     public void checkUrl(String url) {
-        try {
-            wait.until(ExpectedConditions.urlToBe(url));
-        }catch (TimeoutException e){
-            log.error("Current url: {}\nExpected url: {}", driver.getCurrentUrl(), url);
+        try{
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
+        } catch (TimeoutException e){
+            log.error("Page load timeout");
         }
         String currentUrl = driver.getCurrentUrl();
         assertEquals(currentUrl, url, "Current url is not same with expected");
