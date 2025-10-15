@@ -50,34 +50,40 @@ public class SignInDropdownMenu extends BaseMenu {
     }
 
     @Step("Клик по кнопке соц.сети {name}")
-    public void clickOnSocialButton(String nameOfElement) {
+    public SignInDropdownMenu clickOnSocialButton(String nameOfElement) {
         log.info("Click on social button {}", nameOfElement);
         clickOnElement(authDropdown.socialButton(TYPE_OF_LOGIN_CLASS, nameOfElement));
+        return this;
     }
 
     @Step("Клик по ссылке register")
-    public void clickOnChangeDropdownLink() {
+    public SignInDropdownMenu clickOnChangeDropdownLink() {
         log.info("Click on Register link");
         clickOnElement(authDropdown.changeFormLink(TYPE_OF_LOGIN_CLASS, "signup"));
+        return this;
     }
 
     @Step("Ввод email")
-    public void inputEmail(String email) {
+    public SignInDropdownMenu inputEmail(String email) {
         log.info("Input email address");
         inputValue(authDropdown.input(TYPE_OF_LOGIN_CLASS, "Email"), email);
+        return this;
     }
 
     @Step("Ввод пароля")
-    public void inputPassword(String password) {
+    public SignInDropdownMenu inputPassword(String password) {
         log.info("Input password");
         inputValue(authDropdown.input(TYPE_OF_LOGIN_CLASS, "Password"), password);
+        return this;
     }
 
     @Step("Клик по кнопке Submit")
-    public void clickOnSubmitButton() {
+    public SignInDropdownMenu clickOnSubmitButton() {
         log.info("Click on submit button");
         clickOnElement(authDropdown.submitButton(TYPE_OF_LOGIN_CLASS));
         wait.until(ExpectedConditions.urlToBe(BASE_URL_AFTER_AUTH));
+        return this;
+
     }
 
     @Step("Клик по ссылке для восстановления пароля")

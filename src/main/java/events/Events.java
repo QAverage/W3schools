@@ -30,8 +30,9 @@ public class Events {
         driver.findElement(element).click();
     }
 
-    public void inputValue(By element, String value) {
+    public Events inputValue(By element, String value) {
         driver.findElement(element).sendKeys(value);
+        return this;
     }
 
     public void textEquals(String currentText, String expectedText) {

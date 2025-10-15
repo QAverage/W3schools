@@ -13,8 +13,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+import pages.BasePage;
 import utils.TestListener;
-import steps.Authorization;
+import steps.AuthorizationStep;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -28,18 +29,19 @@ public class BaseTest {
     WebDriver driver;
     SoftAssert softAssert;
     Events events;
+    BasePage basePage;
     HeaderMenu headerMenu;
     SignInDropdownMenu signInDropdownMenu;
     SignUpDropdownMenu signUpDropdownMenu;
     RecoveryPasswordDropdownMenu recoveryPasswordDropdownMenu;
 
     //wrappers
-    Authorization authorization;
+    AuthorizationStep authorizationStep;
 
     public void setup(String browser) {
-        log.info("Setup and config browser driver");
         //Базовая настройка драйвера
         if (browser.equalsIgnoreCase("chrome")) {
+            log.info("Setup and config chrome driver");
             ChromeOptions options = new ChromeOptions();
             HashMap<String, Object> chromePrefs = new HashMap<>();
             chromePrefs.put("credentials_enable_service", false);
@@ -51,6 +53,7 @@ public class BaseTest {
             options.addArguments("--disable-infobars");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("firefox")) {
+            log.info("Setup and config firefox driver");
             driver = new FirefoxDriver();
         }
 
@@ -65,9 +68,9 @@ public class BaseTest {
         softAssert = new SoftAssert();
         events = new Events(driver);
         //Обертки
-        authorization = new Authorization(driver);
+        authorizationStep = new AuthorizationStep(driver);
         //Страницы
-
+        basePage = new BasePage(driver);
         //Меню
         signInDropdownMenu = new SignInDropdownMenu(driver);
         signUpDropdownMenu = new SignUpDropdownMenu(driver);
@@ -82,7 +85,6 @@ public class BaseTest {
             log.debug("Make screenshot point with error");
             takeScreenshot(driver);
         }
-        log.info("delete cookies and quit of browser");
         driver.manage().deleteAllCookies();
         driver.quit();
     }

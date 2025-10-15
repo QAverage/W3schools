@@ -57,15 +57,13 @@ public class SignInDropdownTest extends BaseTest {
 
     @Test(description = "Проверка открытия нового окна через кнопки соц.сетей", dataProvider = "SocialButton")
     public void shouldOpenNewWindow(String socialButton, String exceptedUrl) {
-        signInDropdownMenu.clickOnSocialButton(socialButton);
-
-        signInDropdownMenu.checkUrlOfNewWindow(exceptedUrl);
+        signInDropdownMenu.clickOnSocialButton(socialButton).checkUrlOfNewWindow(exceptedUrl);
     }
 
     @Test(description = "Проверка успешной авторизации")
     public void shouldAuthUser() {
-        authorization.authUser(Users.EMAIL_ADDRESS, Users.PASSWORD);
-        events.checkUrl(BASE_URL_AFTER_AUTH);
+        authorizationStep.authUser(Users.EMAIL_ADDRESS, Users.PASSWORD)
+                .checkUrl(BASE_URL_AFTER_AUTH);
     }
 
     @Test(description = "Проверка открытия формы для восстановления пароля")
