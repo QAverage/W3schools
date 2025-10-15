@@ -2,6 +2,6 @@ package data;
 
 public class Users {
 
-    public static final String EMAIL_ADDRESS = "gorbatenko.sam@gmail.com";
-    public static final String PASSWORD = "Jhjxevfhj132$";
+    public static final String EMAIL_ADDRESS = System.getProperty("EMAIL_ADDRESS");
+    public static final String PASSWORD = System.getProperty("PASSWORD");
 }
