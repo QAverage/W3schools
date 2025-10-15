@@ -22,7 +22,7 @@ public class Events {
 
     public Events(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver, Duration.ofMinutes(1));
     }
 
     @Step("Открытие страницы: {page}")

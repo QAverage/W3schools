@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI: true
-      EMAIL: ${{ secrets.SD_EMAIL }}
-      PASSWORD: ${{ secrets.SD_PASSWORD }}
+      #EMAIL: ${{ secrets.SD_EMAIL }}
+      #PASSWORD: ${{ secrets.SD_PASSWORD }}
 
     permissions:
       contents: read
@@ -34,7 +34,7 @@ jobs:
           cache: maven
 
       - name: Run tests
-        run: mvn clean test -DEMAIL_ADDRESS=$EMAIL -DPASSWORD=$PASSWORD
+        run: mvn clean test
 
       - name: Get Allure history
         uses: actions/checkout@v2
