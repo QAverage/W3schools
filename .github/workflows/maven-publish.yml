@@ -4,8 +4,10 @@
 name: W3Schools CI
 
 on:
-  release:
-    types: [created]
+  push: 
+    branches: ["master"]
+  pull_request: 
+    branches: ["master"]
 
 jobs:
   build:
@@ -23,7 +25,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
-
+        settings-path: ${{ github.workspace }} # location for the settings.xml file\
+        cache: maven
     - name: Run tests
       run: mvn clean test
