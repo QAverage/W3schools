@@ -66,14 +66,14 @@ public class SignInDropdownMenu extends BaseMenu {
     @Step("Ввод email")
     public SignInDropdownMenu inputEmail(String email) {
         inputValue(authDropdown.input(TYPE_OF_LOGIN_CLASS, "Email"), email);
-        log.info("Input email address");
+        log.info("Input email address{}", email);
         return this;
     }
 
     @Step("Ввод пароля")
     public SignInDropdownMenu inputPassword(String password) {
         inputValue(authDropdown.input(TYPE_OF_LOGIN_CLASS, "Password"), password);
-        log.info("Input password");
+        log.info("Input password {}", password);
         return this;
     }
 
