@@ -39,6 +39,9 @@ public class BaseTest {
     AuthorizationStep authorizationStep;
 
     public void setup(String browser) {
+
+        String headless = System.getenv("HEADLESS");
+        log.info(headless);
         //Базовая настройка драйвера
         if (browser.equalsIgnoreCase("chrome")) {
             log.info("Setup and config chrome driver");
@@ -51,6 +54,9 @@ public class BaseTest {
             options.addArguments("--disable-notifications");
             options.addArguments("--disable-popup-blocking");
             options.addArguments("--disable-infobars");
+            if (headless != null){
+                options.addArguments("--headless");
+            }
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("firefox")) {
             log.info("Setup and config firefox driver");
@@ -85,7 +91,9 @@ public class BaseTest {
             log.debug("Make screenshot point with error");
             takeScreenshot(driver);
         }
-        driver.manage().deleteAllCookies();
-        driver.quit();
+        if (driver != null){
+            driver.manage().deleteAllCookies();
+            driver.quit();
+        }
     }
 }
