@@ -22,7 +22,7 @@ public class Events {
 
     public Events(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Step("Открытие страницы: {page}")
@@ -53,7 +53,11 @@ public class Events {
     }
 
     public void checkUrl(String url) {
-        wait.until(ExpectedConditions.urlToBe(url));
+        try {
+            wait.until(ExpectedConditions.urlToBe(url));
+        }catch (TimeoutException e){
+            log.error("Current url: {}\nExpected url: {}", driver.getCurrentUrl(), url);
+        }
         String currentUrl = driver.getCurrentUrl();
         assertEquals(currentUrl, url, "Current url is not same with expected");
     }

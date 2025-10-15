@@ -65,30 +65,30 @@ public class SignInDropdownMenu extends BaseMenu {
 
     @Step("Ввод email")
     public SignInDropdownMenu inputEmail(String email) {
-        log.info("Input email address");
         inputValue(authDropdown.input(TYPE_OF_LOGIN_CLASS, "Email"), email);
+        log.info("Input email address");
         return this;
     }
 
     @Step("Ввод пароля")
     public SignInDropdownMenu inputPassword(String password) {
-        log.info("Input password");
         inputValue(authDropdown.input(TYPE_OF_LOGIN_CLASS, "Password"), password);
+        log.info("Input password");
         return this;
     }
 
     @Step("Клик по кнопке Submit")
     public SignInDropdownMenu clickOnSubmitButton() {
-        log.info("Click on submit button");
         clickOnElement(authDropdown.submitButton(TYPE_OF_LOGIN_CLASS));
+        log.info("Click on submit button");
         return this;
 
     }
 
     @Step("Клик по ссылке для восстановления пароля")
     public void clickOnForgotPasswordLink() {
-        log.info("Click on forgot password link");
         clickOnElement(FORGOT_PASSWORD_LINK);
+        log.info("Click on forgot password link");
     }
 }
 
