@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -55,6 +57,7 @@ public class BaseTest {
             options.addArguments("--disable-infobars");
             if (ci != null){
                 options.addArguments("--headless");
+                options.setCapability(CapabilityType.PAGE_LOAD_STRATEGY, "eager");
             }
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("firefox")) {

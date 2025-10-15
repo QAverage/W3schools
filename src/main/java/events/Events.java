@@ -54,7 +54,7 @@ public class Events {
 
     public void checkUrl(String url) {
         try{
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[@class='chakra-text css-c7jn1d']")));
+            wait.until(ExpectedConditions.urlToBe(url));
         } catch (TimeoutException e){
             log.error("Page load timeout");
         }
