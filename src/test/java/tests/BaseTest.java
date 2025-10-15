@@ -87,8 +87,8 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) {
         if (ITestResult.FAILURE == result.getStatus()) {
-            log.debug("Make screenshot point with error");
             takeScreenshot(driver);
+            log.debug("Make screenshot point with error");
         }
         if (driver != null){
             driver.manage().deleteAllCookies();
