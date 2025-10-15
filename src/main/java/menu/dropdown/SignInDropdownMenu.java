@@ -81,7 +81,6 @@ public class SignInDropdownMenu extends BaseMenu {
     public SignInDropdownMenu clickOnSubmitButton() {
         log.info("Click on submit button");
         clickOnElement(authDropdown.submitButton(TYPE_OF_LOGIN_CLASS));
-        wait.until(ExpectedConditions.urlToBe(BASE_URL_AFTER_AUTH));
         return this;
 
     }

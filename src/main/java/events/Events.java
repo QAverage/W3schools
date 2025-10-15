@@ -3,8 +3,11 @@ package events;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,9 +18,11 @@ import static org.testng.Assert.assertEquals;
 public class Events {
 
     WebDriver driver;
+    WebDriverWait wait;
 
     public Events(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Step("Открытие страницы: {page}")
@@ -48,18 +53,22 @@ public class Events {
     }
 
     public void checkUrl(String url) {
+        wait.until(ExpectedConditions.urlToBe(url));
         String currentUrl = driver.getCurrentUrl();
         assertEquals(currentUrl, url, "Current url is not same with expected");
     }
 
     public void checkUrlOfNewWindow(String url) {
-        Object[] windowHandles = driver.getWindowHandles().toArray();
-        log.info(windowHandles);
+        String originalWindow = driver.getWindowHandle();
+
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        Set<String> windowHandles = driver.getWindowHandles();
         try {
-            if (System.getenv("CI") != null){
-                driver.switchTo().window((String) windowHandles[0]);
-            }else {
-                driver.switchTo().window((String) windowHandles[1]);
+            for (String windowHandle : windowHandles){
+                if (!originalWindow.equals(windowHandle)){
+                    driver.switchTo().window(windowHandle);
+                    break;
+                }
             }
         } catch (NoSuchWindowException e) {
             log.error("No such window with url: {}", url);
