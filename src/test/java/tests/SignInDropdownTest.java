@@ -73,3 +73,4 @@ public class SignInDropdownTest extends BaseTest {
         recoveryPasswordDropdownMenu.findRecoveryDropdown().isDisplayed();
     }
 }
+
